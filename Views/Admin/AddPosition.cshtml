@@ -1,0 +1,99 @@
+﻿@model EmployeeManagementSystem.Models.Position
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <title>Add Position</title>
+    <link rel="stylesheet" href="~/css/add_position.css"/>
+
+    <style>
+        .sperror {
+            color: red;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        a {
+            display: inline-block; /* Makes the link behave like a button */
+            background-color: #e7e7e7; /* Light gray background */
+            color: #333; /* Neutral text color */
+            text-decoration: none; /* Remove underline */
+            padding: 10px 20px; /* Spacing inside the link */
+            margin-top: 10px; /* Space above the link */
+            border-radius: 4px; /* Rounded corners */
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+            text-align: center;
+            width: auto;
+        }
+
+            a:hover {
+                background-color: #d6d6d6; /* Darker gray on hover */
+            }
+
+        button, a {
+            display: inline-block; /* Place buttons and links on the same line */
+            margin-right: 10px; /* Add spacing between buttons and links */
+        }
+    </style>
+</head>
+
+<body>
+    <form asp-controller="Admin" asp-action="AddPosition" method="post" class="card">
+        <label>Enter Position</label>
+
+        <!-- Display validation errors -->
+        @if (ViewBag.IsEmptyError)
+        {
+            <p style="color: red;">Position name cannot be empty.</p>
+        }
+
+        <!-- Display duplicate entry error -->
+        @if (ViewBag.IsDuplicateError)
+        {
+            <p style="color: red;">Position already exists.</p>
+        }
+
+        @if (ViewBag.IsSpecialCharError)
+        {
+            <p style="color: red;">Special characters are not allowed in the position name.</p>
+        }
+
+        <!-- Display success message -->
+        @if (ViewBag.IsSuccess)
+        {
+            <p style="color: green;">Position added successfully!</p>
+        }
+
+        <div id="specialCharError" class="sperror" style="display: none;">
+            Special characters are not allowed.
+        </div>
+
+        <input asp-for="@Model.PositionName" type="text" name="positionname"
+               id="positionname" oninput="checkSpecialCharacters()"/>
+
+        <button type="submit">Add</button>
+        <a href="Position">Back</a>
+    </form>
+
+    <script>
+        // Function to check for special characters in the input
+        function checkSpecialCharacters() {
+            const inputField = document.getElementById("positionname");
+            const errorMessage = document.getElementById("specialCharError");
+
+            // Regular expression to detect special characters
+            const specialCharRegex = /[^a-zA-Z0-9\s]/;
+
+            if (specialCharRegex.test(inputField.value)) {
+                errorMessage.style.display = "block"; // Show error message
+            } else {
+                errorMessage.style.display = "none"; // Hide error message
+            }
+        }
+    </script>
+</body>
+</html>

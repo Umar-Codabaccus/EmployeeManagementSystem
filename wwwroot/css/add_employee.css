@@ -1,0 +1,120 @@
+﻿body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9; /* Soft background similar to login */
+    margin: 0;
+    padding: 0;
+    color: #333; /* Neutral text color */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Full height for centered form */
+}
+
+/* Card styling for the form */
+.card {
+    background-color: white;
+    padding: 25px 30px;
+    border-radius: 8px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Enhanced shadow for modern feel */
+    max-width: 500px; /* Slightly wider form */
+    width: 100%;
+    text-align: center; /* Center align form elements */
+    margin: 0 15px; /* Add margin on smaller screens */
+}
+
+    /* Header inside the card */
+    .card h2 {
+        color: #0056b3; /* Blue color for header */
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+/* Form labels */
+label {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333; /* Darker text for labels */
+    margin-bottom: 8px;
+    display: block;
+    text-align: left;
+}
+
+/* Input field styling */
+input[type="text"], input[type="email"], input[type="number"], input[type="date"], select {
+    width: 100%; /* Full width of the input fields */
+    padding: 10px;
+    margin: 10px 0 20px 0; /* Add spacing between fields */
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box; /* Ensure padding doesn't affect width */
+}
+
+/* Select dropdown styling */
+select {
+    background-color: #fff; /* White background */
+    color: #333; /* Neutral text */
+    font-size: 14px;
+}
+
+/* Button styling */
+button {
+    background-color: #0056b3; /* Blue background */
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+    width: 100%; /* Full width button */
+    margin-top: 15px; /* Spacing from inputs */
+}
+
+    /* Button hover effect */
+    button:hover {
+        background-color: #003d80; /* Darker blue on hover */
+    }
+
+/* Error message styling */
+.sperror {
+    color: red;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+/* Success message styling */
+p {
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+/* Back button styling */
+a {
+    display: inline-block;
+    background-color: #e7e7e7;
+    color: #333;
+    text-decoration: none;
+    padding: 10px 20px;
+    margin-top: 10px;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    width: auto;
+}
+
+    a:hover {
+        background-color: #d6d6d6; /* Darker gray on hover */
+    }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .card {
+        padding: 20px 25px;
+    }
+
+    button {
+        font-size: 16px; /* Slightly larger text for buttons */
+    }
+}

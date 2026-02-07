@@ -1,0 +1,88 @@
+﻿/* General body styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9; /* Light gray background */
+    margin: 0;
+    padding: 0;
+    color: #333; /* Neutral text color */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Full height */
+}
+
+/* Card styling for the form */
+.card {
+    background-color: white;
+    padding: 20px 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    max-width: 400px; /* Limit form width */
+    width: 100%;
+    text-align: center; /* Center align text and form */
+}
+
+/* Form labels */
+label {
+    font-size: 14px;
+    font-weight: bold;
+    color: #0056b3; /* Blue text for labels */
+    margin-bottom: 10px;
+    display: block; /* Ensure labels are on their own line */
+}
+
+    label .employees {
+        font-size: 14px;
+        font-weight: bold;
+        color: #0056b3; /* Blue text for labels */
+        margin-top: 10px;
+        margin-bottom: 10px;
+        display: block; /* Ensure labels are on their own line */
+    }
+
+input[type="text"] {
+    width: 100%; /* Full width */
+    padding: 10px;
+    margin: 10px 0 20px 0; /* Add spacing between fields */
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box; /* Include padding in width calculation */
+}
+
+/* Select dropdown styling */
+select {
+    width: 100%; /* Full width dropdown */
+    padding: 10px;
+    margin: 10px 0 20px 0; /* Add spacing between elements */
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box; /* Include padding in width calculation */
+    background-color: #fff; /* White background */
+    color: #333; /* Neutral text */
+}
+
+/* Button styling */
+button {
+    background-color: #d9534f; /* Red background for delete */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+    width: 100%; /* Full width button */
+}
+
+    button:hover {
+        background-color: #c9302c; /* Darker red on hover */
+    }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .card {
+        padding: 15px 20px;
+    }
+}

@@ -1,0 +1,61 @@
+﻿@model EmployeeManagementSystem.ViewModels.UpdateEmployeeViewModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <title>Update Employee Phone Number</title>
+    <link rel="stylesheet" href="~/css/add_employee.css" />
+</head>
+<body>
+    <form asp-controller="AdminUpdate" asp-action="UpdatePhoneNumber" method="post" class="card">
+        <h2>Enter New Phone Number</h2>
+
+        @if (ViewBag.Error != null)
+        {
+            <div style="color: red;">@ViewBag.Error</div>
+        }
+
+        <!-- Phone -->
+        <div id="phoneError" class="sperror" style="display: none; color: red;">
+            Phone number must start with '5' and contain 8 digits.
+        </div>
+        <label>Phone</label>
+        <input type="text" id="phone" name="Phone" maxlength="8" required />
+
+        <button type="submit">Update Phone Number</button>
+    </form>
+
+    <script>
+        // Function to check for special characters in the input
+        function checkSpecialCharacters(event) {
+            const inputField = event.target; // Get the field that triggered the event
+            const errorMessageId = inputField.id + "Error"; // Dynamically create error message ID
+            const errorMessage = document.getElementById(errorMessageId);
+
+            // Regular expression to detect special characters
+            const specialCharRegex = /[^a-zA-Z0-9\s]/;
+
+            // Validate input and toggle error message visibility
+            if (specialCharRegex.test(inputField.value)) {
+                errorMessage.style.display = "block"; // Show error message
+            } else {
+                errorMessage.style.display = "none"; // Hide error message
+            }
+
+            // Phone number validation (must start with 5 and be 8 digits long)
+            document.getElementById("phone").addEventListener("input", function (event) {
+                const phoneField = event.target;
+                const phoneError = document.getElementById("phoneError");
+                if (!/^5\d{0,7}$/.test(phoneField.value)) {
+                    phoneError.style.display = "block";
+                } else {
+                    phoneError.style.display = "none";
+                }
+            });
+        }
+    </script>
+</body>
+</html>

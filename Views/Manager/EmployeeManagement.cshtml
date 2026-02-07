@@ -1,0 +1,261 @@
+﻿@model EmployeeManagementSystem.ViewModels.ManagerViewModels.EmployeeManagementVM
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <title>Manager Dashboard</title>
+    <link rel="stylesheet" href="~/css/responsive.css" />
+    <style>
+            /* General body styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9; /* Light gray background for the page */
+            margin: 0;
+            padding: 0;
+            color: #333; /* Neutral text color */
+        }
+
+        /* Header styling */
+        header {
+            background-color: #0056b3; /* Blue background */
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between; /* Align the header elements */
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        }
+
+        header .title h3 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        /* Horizontal Navigation Styling */
+        .navcontainer {
+            width: 100%;
+            background-color: #0056b3; /* Same blue as header */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav ul {
+            display: flex; /* Arrange navigation items horizontally */
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            justify-content: center; /* Center navigation items */
+        }
+
+        .nav ul li {
+            padding: 15px 20px; /* Add space between items */
+            cursor: pointer;
+        }
+
+        .nav ul li .nav-btn {
+            text-decoration: none;
+            color: white;
+            background-color: #0056b3; /* Match the header/nav color */
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .nav ul li .nav-btn:hover {
+            background-color: #003d80; /* Darker blue background on hover */
+        }
+
+        /* Main container styling */
+        .main-container {
+            display: flex;
+            flex-direction: column; /* Stack the main content */
+            margin: 20px;
+            gap: 20px;
+        }
+
+        /* Main content styling */
+        .main {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Chart container styling */
+        .box-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap; /* Wrap on smaller screens */
+            margin-bottom: 30px;
+        }
+
+        .box1, .box2 {
+            flex: 1;
+            min-width: 300px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        canvas {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Project container styling */
+        .project-container {
+            margin-top: 30px;
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .project-header h1 {
+            font-size: 24px;
+            margin: 0;
+            color: #0056b3;
+        }
+
+        .project-header .view {
+            background-color: #0056b3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .project-header .view:hover {
+            background-color: #003d80;
+        }
+
+        .project-body {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .topic-heading {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* Four equal columns */
+            text-align: left;
+            font-weight: bold;
+            border-bottom: 2px solid #0056b3;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .items {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .item1 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* Four equal columns */
+            background-color: white;
+            border-radius: 8px;
+            padding: 10px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .item1 .label-tag {
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .item1 .label-tag:nth-child(4) {
+            color: #0056b3; /* Blue for status */
+        }
+
+        /* Buttons */
+        button {
+            background-color: #0056b3; /* Match the header/nav color */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #003d80; /* Darker blue on hover */
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="title">
+            <h3>code no jutsu</h3>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <div class="navcontainer">
+            <nav class="nav">
+                <form asp-controller="Manager" asp-action="ManagerDashboard" method="post">
+                    <input type="hidden" name="EmployeeID" value="@Model.ManagerID" />
+                    <ul>
+                        <li><button class="nav-btn" type="submit" name="navOption" value="dashboard">Dashboard</button></li>
+                        <li><button class="nav-btn" type="submit" name="navOption" value="project">Project Management</button></li>
+                        <li><button class="nav-btn" type="submit" name="navOption" value="employee">Employee Management</button></li>
+                        <li><button class="nav-btn" type="submit" name="navOption" value="timesheet">Timesheet</button></li>
+                        <li><button class="nav-btn" type="submit" name="navOption" value="profile">Profile</button></li>
+                        <li><button class="nav-btn" type="submit" name="navOption" value="logout">Logout</button></li>
+                    </ul>
+                </form>
+            </nav>
+        </div>
+    </div>
+
+    <div class="main">
+        <div class="box-container">
+            <div class="box1">
+                <h3>Manager @Model.ManagerName</h3>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="body">
+                <div class="topic-heading">
+                    <h3 class="t-op">Employee</h3>
+                    <h3 class="t-op">Position</h3>
+                    <h3 class="t-op">Email</h3>
+                </div>
+
+                <div class="items">
+                    <div class="item1">
+                        @foreach (var project in Model.Employees)
+                        {
+                            <h3>@project.FullName</h3>
+                            <h3>@project.PositionName</h3>
+                            <h3>@project.Email</h3>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>

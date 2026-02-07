@@ -1,0 +1,68 @@
+﻿@model EmployeeManagementSystem.ViewModels.EmployeeAllViewModel
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <title>Employees</title>
+    <link rel="stylesheet" href="~/css/admin_employee_view.css" />
+</head>
+
+<body>
+    <header>
+        <div class="title">
+            <h3>code no jutsu</h3>
+        </div>
+    </header>
+
+    <div class="main">
+        <section class="employee-container">
+            <!-- Header -->
+            <div class="employee-header">
+                <h2 class="employees">Employees</h2>
+                <div class="button-group">
+                    <a href="Employee" class="button">Back</a>
+                </div>
+            </div>
+
+            <!-- Body -->
+            <div class="employee-body">
+                <!-- Titles -->
+                <div class="topic-heading">
+                    <h4 class="employee-title">Employee</h4>
+                    <h4 class="employee-title">Email </h4>
+                    <h4 class="employee-title">Phone</h4>
+                    <h4 class="employee-title">DOB</h4>
+                    <h4 class="employee-title">City</h4>
+                    <h4 class="employee-title">Street </h4>
+                    <h4 class="employee-title">Position </h4>
+                    <h4 class="employee-title">Salary</h4>
+                </div>
+
+                <!-- Employee List -->
+                <!-- Employee List -->
+                <div class="items">
+                    @foreach (var employee in Model.Employees)
+                    {
+                        <div class="item1">
+                            <h4 class="employee-item" data-label="Employee">@employee.FullName</h4>
+                            <h4 class="employee-item" data-label="Email">@employee.Email</h4>
+                            <h4 class="employee-item" data-label="Phone">@employee.Phone</h4>
+                            <h4 class="employee-item" data-label="DOB">@employee.DateOfBirth.ToString("yyyy/MM/dd")</h4>
+                            <h4 class="employee-item" data-label="City">@employee.City</h4>
+                            <h4 class="employee-item" data-label="Street">@employee.Street</h4>
+                            <h4 class="employee-item" data-label="Position">@employee.PositionName</h4>
+                            <h4 class="employee-item" data-label="Salary">@employee.DisplaySalary</h4>
+                        </div>
+                    }
+                </div>
+
+            </div>
+        </section>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,58 @@
+﻿@model EmployeeManagementSystem.ViewModels.UpdateEmployeeViewModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <title>Update Employee Phone Number</title>
+    <link rel="stylesheet" href="~/css/add_employee.css" />
+</head>
+<body>
+    <form asp-controller="AdminUpdate" asp-action="UpdateSalary" method="post" class="card">
+        <h2>Enter Salary</h2>
+
+        @if (ViewBag.Error != null)
+        {
+            <div style="color: red;">@ViewBag.Error</div>
+        }
+
+        <!-- Salary -->
+        <div id="salaryError" class="sperror" style="display: none; color: red;">
+            Salary must be a valid positive number.
+        </div>
+        <label>Salary</label>
+        <input type="text" id="salary" name="Salary" required />
+        <button type="submit">Update Salary</button>
+    <script>
+        // Function to check for special characters in the input
+        function checkSpecialCharacters(event) {
+            const inputField = event.target; // Get the field that triggered the event
+            const errorMessageId = inputField.id + "Error"; // Dynamically create error message ID
+            const errorMessage = document.getElementById(errorMessageId);
+
+            // Regular expression to detect special characters
+            const specialCharRegex = /[^a-zA-Z0-9\s]/;
+
+            // Validate input and toggle error message visibility
+            if (specialCharRegex.test(inputField.value)) {
+                errorMessage.style.display = "block"; // Show error message
+            } else {
+                errorMessage.style.display = "none"; // Hide error message
+            }
+
+            // Salary validation (numbers only)
+            document.getElementById("salary").addEventListener("input", function (event) {
+                const salaryField = event.target;
+                const salaryError = document.getElementById("salaryError");
+                if (!/^\d+$/.test(salaryField.value)) {
+                    salaryError.style.display = "block";
+                } else {
+                    salaryError.style.display = "none";
+                }
+            });
+        }
+    </script>
+</body>
+</html>

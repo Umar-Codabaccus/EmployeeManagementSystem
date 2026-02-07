@@ -1,0 +1,77 @@
+﻿/* General body styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9; /* Soft background color */
+    color: #333; /* Neutral text color */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full height view */
+}
+
+/* Center container */
+.container {
+    background-color: #fff; /* White background for the form */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    width: 350px; /* Fixed width */
+    padding: 20px; /* Padding around the content */
+    text-align: center;
+}
+
+/* Heading style */
+.container h2 {
+    margin-bottom: 20px;
+    color: #0056b3; /* A nice blue shade */
+}
+
+/* Error message styling */
+.container h6 {
+    font-size: 14px;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+/* Form elements */
+form label {
+    display: block;
+    font-size: 14px;
+    text-align: left;
+    margin: 10px 0 5px; /* Space above and below */
+    color: #555; /* Slightly lighter text color */
+}
+
+form input[type="text"],
+form input[type="password"] {
+    width: 94%;
+    padding: 10px;
+    margin-bottom: 15px; /* Space below each input */
+    border: 1px solid #ccc; /* Light gray border */
+    border-radius: 4px; /* Rounded edges */
+    font-size: 14px;
+}
+
+/* Button styling */
+form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #0056b3; /* Blue background */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #003d80; /* Darker blue on hover */
+}
+
+/* Make the form responsive */
+@media (max-width: 400px) {
+    .container {
+        width: 90%; /* Adjust width for smaller screens */
+    }
+}

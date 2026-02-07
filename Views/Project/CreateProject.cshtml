@@ -1,0 +1,117 @@
+﻿@model EmployeeManagementSystem.ViewModels.ProjectManagement.ProjectDash
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <title>Add Team</title>
+
+    <link rel="stylesheet" href="~/css/add_team.css" />
+    <style>
+        .sperror {
+            color: red;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        /* Select dropdown styling */
+        select {
+            width: 100%; /* Full width dropdown */
+            padding: 10px;
+            margin: 10px 0 20px 0; /* Add spacing between elements */
+            border: 1px solid #ccc; /* Light border */
+            border-radius: 4px;
+            font-size: 14px;
+            box-sizing: border-box; /* Include padding in width calculation */
+            background-color: #fff; /* White background */
+            color: #333; /* Neutral text */
+        }
+        a {
+            display: inline-block; /* Makes the link behave like a button */
+            background-color: #e7e7e7; /* Light gray background */
+            color: #333; /* Neutral text color */
+            text-decoration: none; /* Remove underline */
+            padding: 10px 20px; /* Spacing inside the link */
+            margin-top: 10px; /* Space above the link */
+            border-radius: 4px; /* Rounded corners */
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+            text-align: center;
+            width: auto;
+        }
+
+        a:hover {
+            background-color: #d6d6d6; /* Darker gray on hover */
+        }
+
+        /* Input field styling */
+        input[type="text"], input[type="email"], input[type="number"], input[type="date"], select {
+            width: 100%; /* Full width of the input fields */
+            padding: 10px;
+            margin: 10px 0 20px 0; /* Add spacing between fields */
+            border: 1px solid #ccc; /* Light border */
+            border-radius: 4px;
+            font-size: 14px;
+            box-sizing: border-box; /* Ensure padding doesn't affect width */
+        }
+
+        button, a {
+            display: inline-block; /* Place buttons and links on the same line */
+            margin-right: 10px; /* Add spacing between buttons and links */
+        }
+    </style>
+</head>
+
+<body>
+    <form asp-controller="Project" asp-action="CreateProject" method="post" class="card">
+        <label>Create Project</label>
+
+        <!-- Display validation errors -->
+        @if (ViewBag.IsEmptyError)
+        {
+            <p style="color: red;">Project name cannot be empty.</p>
+        }
+
+        @if (ViewBag.IsSpecialCharError)
+        {
+            <p style="color: red;">Special characters are not allowed in the project name.</p>
+        }
+
+        <div id="specialCharError" class="sperror" style="display: none;">
+            Special characters are not allowed.
+        </div>
+
+        <input asp-for="@Model.ProjectName" type="text" id="projectname" name="projectname" placeholder="Enter a project" 
+            maxlength=20 oninput="checkSpecialCharacters()" />
+
+        <label>Deadline</label>
+        @Html.TextBoxFor(m => m.Deadline, new { type = "date" })
+
+        @if (ViewBag.IsDepartmentSearch != null)
+        {
+        <div style="color: red;">@ViewBag.IsDepartmentSearch</div>
+        }
+
+        <input asp-for="@Model.Keyword" type="text" id="keyword" name="keyword" placeholder="Search Department...">
+        <button type="submit" class="search">Search</button>
+    </form>
+
+    <script>
+        // Function to check for special characters in the input
+        function checkSpecialCharacters() {
+            const inputField = document.getElementById("teamname");
+            const errorMessage = document.getElementById("specialCharError");
+
+            // Regular expression to detect special characters
+            const specialCharRegex = /[^a-zA-Z0-9\s]/;
+
+            if (specialCharRegex.test(inputField.value)) {
+                errorMessage.style.display = "block"; // Show error message
+            } else {
+                errorMessage.style.display = "none"; // Hide error message
+            }
+        }
+    </script>
+</body>
+</html>

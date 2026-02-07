@@ -1,0 +1,52 @@
+﻿@model EmployeeManagementSystem.ViewModels.UpdateEmployeeViewModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <title>Update Employee Name</title>
+    <link rel="stylesheet" href="~/css/add_employee.css" />
+</head>
+<body>
+    <form asp-controller="AdminUpdate" asp-action="UpdateName" method="post" class="card">
+        <h2>Enter New Name</h2>
+
+        <!-- Firstname -->
+        <div id="firstnameError" class="sperror" style="display: none; color: red;">
+            Special characters are not allowed in the Firstname.
+        </div>
+        <label>Firstname</label>
+        <input type="text" id="firstname" name="firstname" oninput="checkSpecialCharacters(event)" required />
+
+        <!-- Lastname -->
+        <div id="lastnameError" class="sperror" style="display: none; color: red;">
+            Special characters are not allowed in the Lastname.
+        </div>
+        <label>Lastname</label>
+        <input type="text" id="lastname" name="lastname" oninput="checkSpecialCharacters(event)" required />
+ 
+        <button type="submit">Update Name</button>
+    </form>
+
+    <script>
+        // Function to check for special characters in the input
+        function checkSpecialCharacters(event) {
+            const inputField = event.target; // Get the field that triggered the event
+            const errorMessageId = inputField.id + "Error"; // Dynamically create error message ID
+            const errorMessage = document.getElementById(errorMessageId);
+
+            // Regular expression to detect special characters
+            const specialCharRegex = /[^a-zA-Z0-9\s]/;
+
+            // Validate input and toggle error message visibility
+            if (specialCharRegex.test(inputField.value)) {
+                errorMessage.style.display = "block"; // Show error message
+            } else {
+                errorMessage.style.display = "none"; // Hide error message
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+﻿@model EmployeeManagementSystem.ViewModels.UpdateEmployeeViewModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <title>Update Employee</title>
+
+    <link rel="stylesheet" href="~/css/delete_employee.css" />
+    <style>
+        .search {
+            background-color: #0056b3; /* Blue background */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+            width: 100%; /* Full width button */
+        }
+
+        .search:hover {
+            background-color: #003d80; /* Darker blue on hover */
+        }
+
+        /* Button styling */
+        button {
+            background-color: #0056b3; /* Blue background */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+            width: 100%; /* Full width button */
+        }
+
+            button:hover {
+                background-color: #003d80; /* Darker blue on hover */
+            }
+        button{
+            display: inline-block; /* Place buttons and links on the same line */
+            margin-right: 10px; /* Add spacing between buttons and links */
+        }
+
+        .employee-body {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .items {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .item1 {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr); /* Four equal columns */
+            color: white;
+            border-radius: 8px;
+            padding: 10px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+            .item1 .label-tag {
+                font-weight: bold;
+                text-transform: uppercase;
+            }
+    </style>
+</head>
+<body>
+    <form asp-controller="Admin" asp-action="SelectEmployeeToUpdate" method="post" class="card">
+        <!-- Employee Selection -->
+        <label class="employees" for="employees">Select Employee</label>
+        <div class="employee-body">
+            <div class="items">
+                @foreach (var employee in Model.EmployeeDetails)
+                {
+                    <div class="item1">
+                        <input type="hidden" name="EmployeeID" value="@employee.EmployeeID" />
+                        <button type="submit">@employee.FullName     @employee.RoleName</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </form>
+</body>
+</html>
+

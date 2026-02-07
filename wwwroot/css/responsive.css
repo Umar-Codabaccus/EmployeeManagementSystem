@@ -1,0 +1,29 @@
+﻿/* Responsive Design */
+@media (max-width: 768px) {
+    .nav ul {
+        flex-direction: column; /* Stack navigation items vertically on small screens */
+        text-align: center;
+    }
+
+    .main-container {
+        margin: 10px;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .card {
+        padding: 20px 25px;
+    }
+
+    .form-btn {
+        font-size: 16px; /* Slightly larger text for buttons */
+    }
+}
+
+/* Make the form responsive */
+@media (max-width: 400px) {
+    .form-container {
+        width: 90%; /* Adjust width for smaller screens */
+    }
+}

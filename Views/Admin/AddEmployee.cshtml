@@ -1,0 +1,145 @@
+﻿@model EmployeeManagementSystem.ViewModels.EmployeeDetailsViewModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <title>Add Employee</title>
+    <link rel="stylesheet" href="~/css/add_employee.css"/>
+    <script src="~/js/emailValidation.js"></script>
+</head>
+<body>
+    <form asp-controller="Admin" asp-action="AddEmployee" method="post" class="card">
+        <h2>Create an Employee</h2>
+
+        @if (ViewBag.Error != null)
+        {
+            <div style="color: red;">@ViewBag.Error</div>
+        }
+
+        @if (ViewBag.Success != null)
+        {
+            <div style="color: green;">@ViewBag.Success</div>
+        }
+
+        <!-- Firstname -->
+        <div id="firstnameError" class="sperror" style="display: none; color: red;">
+            Special characters are not allowed in the Firstname.
+        </div>
+        <label>Firstname</label>
+        <input type="text" id="firstname" name="firstname" oninput="checkSpecialCharacters(event)" required />
+
+        <!-- Lastname -->
+        <div id="lastnameError" class="sperror" style="display: none; color: red;">
+            Special characters are not allowed in the Lastname.
+        </div>
+        <label>Lastname</label>
+        <input type="text" id="lastname" name="lastname" oninput="checkSpecialCharacters(event)" required />
+
+        <!-- Date of Birth -->
+        <label>Date of Birth</label>
+        @Html.TextBoxFor(m => m.DateOfBirth, new { type = "date" })
+
+        <!-- Email -->
+        <span id="emailError" style="color: red; display: none;"></span>
+        <label>Email</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required/>
+       
+        <!-- Phone -->
+        <div id="phoneError" class="sperror" style="display: none; color: red;">
+            Phone number must start with '5' and contain 8 digits.
+        </div>
+        <label>Phone</label>
+        <input type="text" id="phone" name="Phone" maxlength="8" required />
+
+        <!-- City -->
+        <div id="cityError" class="sperror" style="display: none; color: red;">
+            Special characters are not allowed in the City name.
+        </div>
+        <label>City</label>
+        <input type="text" id="city" name="city" oninput="checkSpecialCharacters(event)" maxlength="20" required/>
+
+        <!-- Street -->
+        <div id="streetError" class="sperror" style="display: none; color: red;">
+            Special characters are not allowed in the Street name.
+        </div>
+        <label>Street</label>
+        <input type="text" id="street" name="street" oninput="checkSpecialCharacters(event)" maxlength="20" required/>
+
+        <!-- Salary -->
+        <div id="salaryError" class="sperror" style="display: none; color: red;">
+            Salary must be a valid positive number.
+        </div>
+        <label>Salary</label>
+        <input type="text" id="salary" name="Salary" required />
+
+
+        <!-- Employee Position -->
+        <label>Select Employee's Position</label>
+        <select asp-for="PositionId" name="PositionID" asp-items="@Model.Positions">
+            <option>Please select one</option>
+            @foreach (var items in Model.PositionList)
+            {
+                <option value="@items.PositionID">@items.PositionName</option>
+            }
+        </select>
+
+        <!-- Employee Role -->
+        <label>Select Employee's Role</label>
+        <select asp-for="RoleId" name="RoleID" asp-items="@Model.Roles">
+            <option>Please select one</option>
+            @foreach (var items in Model.RoleList)
+            {
+                <option value="@items.RoleID">@items.RoleName</option>
+            }
+        </select>
+
+        <!-- Submit and Back Buttons -->
+        <button type="submit">Add</button>
+        <a href="Employee">Back</a>
+    </form>
+
+    <script>
+        // Function to check for special characters in the input
+        function checkSpecialCharacters(event) {
+            const inputField = event.target; // Get the field that triggered the event
+            const errorMessageId = inputField.id + "Error"; // Dynamically create error message ID
+            const errorMessage = document.getElementById(errorMessageId);
+
+            // Regular expression to detect special characters
+            const specialCharRegex = /[^a-zA-Z0-9\s]/;
+
+            // Validate input and toggle error message visibility
+            if (specialCharRegex.test(inputField.value)) {
+                errorMessage.style.display = "block"; // Show error message
+            } else {
+                errorMessage.style.display = "none"; // Hide error message
+            }
+        }
+
+        // Salary validation (numbers only)
+        document.getElementById("salary").addEventListener("input", function (event) {
+            const salaryField = event.target;
+            const salaryError = document.getElementById("salaryError");
+            if (!/^\d+$/.test(salaryField.value)) {
+                salaryError.style.display = "block";
+            } else {
+                salaryError.style.display = "none";
+            }
+        });
+
+        // Phone number validation (must start with 5 and be 8 digits long)
+        document.getElementById("phone").addEventListener("input", function (event) {
+            const phoneField = event.target;
+            const phoneError = document.getElementById("phoneError");
+            if (!/^5\d{0,7}$/.test(phoneField.value)) {
+                phoneError.style.display = "block";
+            } else {
+                phoneError.style.display = "none";
+            }
+        });
+    </script>
+</body>
+</html>

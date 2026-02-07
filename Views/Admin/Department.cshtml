@@ -1,0 +1,103 @@
+﻿@model EmployeeManagementSystem.ViewModels.DepartmentViewModel
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <title>Department</title>
+    <link rel="stylesheet" href="~/css/style.css" />
+    <link rel="stylesheet" href="~/css/responsive.css" />
+
+    <style>
+        .header .button-group {
+            display: flex;
+            gap: 10px; /* Space between buttons */
+        }
+
+        /* Buttons */
+        .header .button {
+            background-color: #0056b3; /* Match the header/nav color */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .header .button:hover {
+            background-color: #003d80; /* Darker blue on hover */
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="title">
+            <h3>code no jutsu</h3>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <div class="navcontainer">
+            <nav class="nav">
+                <form asp-controller="Admin" asp-action="AdminDashboard" method="post">
+                    <input type="hidden" name="EmployeeID" value="@Model.EmployeeID" />
+                    <ul>
+                        <li><button class="nav-btn" type="submit" name="navOption" value="dashboard">Dashboard</button></li>
+                        <li><button class="nav-btn" type="submit" name="navOption" value="department">Departments</button></li>
+                        <li><button class="nav-btn" type="submit" name="navOption" value="team">Teams</button></li>
+                        <li><button class="nav-btn" type="submit" name="navOption" value="position">Positions</button></li>
+                        <li><button class="nav-btn" type="submit" name="navOption" value="employee">Employees</button></li>
+                        <li><button class="nav-btn" type="submit" name="navOption" value="management">Management</button></li>
+                        <li><button class="nav-btn" type="submit" name="navOption" value="profile">Profile</button></li>
+                        <li><button class="nav-btn" type="submit" name="navOption" value="logout">Logout</button></li>
+                    </ul>
+                </form>
+            </nav>
+        </div>
+    </div>
+
+
+    <div class="main">
+        <section class="container">
+            <!-- Header -->
+            <div class="header">
+                <h1 class="departments">Departments</h1>
+                <div class="button-group">
+                    <a href="AddDepartment" class="button">Add Department</a>
+                    <a href="DeleteDepartment" class="button">Delete</a>
+                </div>
+            </div>
+
+            <!-- Body -->
+            <div class="body">
+                <!-- Titles -->
+                <div class="topic-heading">
+                    <h3 class="dept-title">Department Name</h3>
+                    <h3 class="dept-title">Teams</h3>
+                    <h3 class="dept-title">Employees</h3>
+                </div>
+
+                <!-- Department List -->
+                <div class="items">
+                    @foreach (var department in Model.Departments)
+                    {
+                        <div class="item1">
+                            <h3 class="item">@department.DepartmentName</h3>
+                            <h3 class="item">@department.NumberOfTeams</h3>
+                            <h3 class="item">@department.NumberOfEmployees</h3>
+                        </div>
+                    }
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+
+</html>

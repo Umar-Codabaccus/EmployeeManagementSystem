@@ -1,0 +1,83 @@
+﻿@model EmployeeManagementSystem.ViewModels.ClockInOutVM
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <title>Timesheet</title>
+    <link rel="stylesheet" href="~/css/admin_dashboard.css" />
+</head>
+
+<body>
+    <header>
+        <div class="title">
+            <h3>code no jutsu</h3>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <div class="navcontainer">
+            <nav class="nav">
+                <form asp-controller="Timesheet" asp-action="TimesheetDashboard" method="post">
+                    <input type="hidden" name="EmployeeID" value="@Model.EmployeeID" />
+                    <ul>
+                        <li><button class="nav-btn" type="submit" name="navOption" value="dashboard">Dashboard</button></li>
+                        <li><button class="nav-btn" type="submit" name="navOption" value="project">Project Management</button></li>
+                        <li><button class="nav-btn" type="submit" name="navOption" value="employee">Employee Management</button></li>
+                        <li><button class="nav-btn" type="submit" name="navOption" value="timesheet">Timesheet</button></li>
+                        <li><button class="nav-btn" type="submit" name="navOption" value="profile">Profile</button></li>
+                        <li><button class="nav-btn" type="submit" name="navOption" value="logout">Logout</button></li>
+                    </ul>
+                </form>
+            </nav>
+        </div>
+    </div>
+
+    <div class="main">
+        <div class="project-container">
+            <div class="project-header">
+                <h1 class="recent-projects">@Model.DisplayWorkdate</h1>
+
+                @if (ViewBag.Error != null)
+                {
+                    <p style="color: red">@ViewBag.Error</p>
+                }
+
+                <form asp-controller="Timesheet" asp-action="TimesheetDashboard" method="post">
+                    <input type="hidden" name="Workdate" value="@Model.Workdate" />
+                    <button type="submit" class="view" name="clockButton" value="clockin">Clock In</button>
+                </form>
+                <form asp-controller="Timesheet" asp-action="TimesheetDashboard" method="post">
+                    <input type="hidden" name="Workdate" value="@Model.Workdate" />
+                    <button type="submit" class="view" name="clockButton" value="clockout">Clock Out</button>
+                </form>             
+            </div>
+
+            <div class="project-body">
+                <div class="topic-heading">
+                    <h3 class="t-op">Date</h3>
+                    <h3 class="t-op">Clock In</h3>
+                    <h3 class="t-op">Clock Out</h3>
+                    <h3 class="t-op">Hours Worked</h3>
+                </div>
+
+                <div class="items">
+                    <div class="item1">
+                        @foreach (var attendance in Model.Attendances)
+                        {
+                            <h3 class="t-op-nextlvl">@attendance.Workdate.ToString("yyyy/MM/dd")</h3>
+                            <h3 class="t-op-nextlvl">@attendance.ClockIn</h3>
+                            <h3 class="t-op-nextlvl">@attendance.ClockOut</h3>
+                            <h3 class="t-op-nextlvl label-tag">@Math.Round(attendance.HoursWorked, 2)</h3>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

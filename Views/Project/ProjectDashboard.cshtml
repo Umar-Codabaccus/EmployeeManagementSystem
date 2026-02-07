@@ -1,0 +1,215 @@
+﻿@model EmployeeManagementSystem.ViewModels.ProjectManagement.ProjectDash
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <title>Project Management</title>
+    <link rel="stylesheet" href="~/css/responsive.css" />
+
+
+    <style>
+        /* General body styling */
+        body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f9; /* Light gray background for the page */
+        margin: 0;
+        padding: 0;
+        color: #333; /* Neutral text color */
+        }
+
+        /* Header styling */
+        header {
+        background-color: #0056b3; /* Blue background */
+        color: white;
+        padding: 10px 20px;
+        display: flex;
+        justify-content: space-between; /* Align the header elements */
+        align-items: center;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        }
+
+        header .title h3 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        /* Horizontal Navigation Styling */
+        .navcontainer {
+        width: 100%;
+        background-color: #0056b3; /* Same blue as header */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        nav ul {
+        display: flex; /* Arrange navigation items horizontally */
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        justify-content: center; /* Center navigation items */
+        }
+
+        nav ul li {
+        padding: 10px 15px; /* Add space between items */
+        cursor: pointer;
+        }
+
+        nav ul li .nav-btn {
+        text-decoration: none;
+        color: white;
+        background-color: #0056b3; /* Match the header/nav color */
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        }
+
+        nav ul li .nav-btn:hover {
+        background-color: #003d80; /* Darker blue background on hover */
+        }
+
+        /* Main container styling */
+        .main-container {
+        display: flex;
+        flex-direction: column; /* Stack the main content */
+        margin: 20px;
+        gap: 20px;
+        }
+
+
+        .project-container {
+        margin-top: 30px;
+        }
+
+        /* Header */
+        .project-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        }
+
+        .project-header h1 {
+        font-size: 24px;
+        margin-left: 10px;
+        color: #0056b3;
+        }
+
+        .project-header .button-group {
+        display: flex;
+        gap: 10px; /* Space between buttons */
+        }
+
+        /* Buttons */
+        .project-header .button {
+        background-color: #0056b3; /* Match the header/nav color */
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        }
+
+        .project-header .button:hover {
+        background-color: #003d80; /* Darker blue on hover */
+        }
+
+        /* Department Body */
+        .project-body {
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .topic-heading {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr); /* Adjust columns for ID and Name */
+        text-align: left;
+        font-weight: bold;
+        border-bottom: 2px solid #0056b3;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+        }
+
+        .items {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        }
+
+        .item1 {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr); /* Match column proportions to the header */
+        background-color: white;
+        border-radius: 8px;
+        padding: 10px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .proj-item {
+        font-size: 14px;
+        color: #333;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="title">
+            <h3>code no jutsu</h3>
+        </div>
+    </header>
+
+    <div class="main">
+        <section class="project-container">
+            <!-- Header -->
+            <div class="project-header">
+                <h1 class="projects">Projects</h1>
+                @if (ViewBag.ProjectCreated)
+                {
+                    <div style="color: green;">Project Created</div>
+                }
+                <div class="button-group">
+                    <a href="CreateProject" class="button">Create Project</a>
+                    <a href="HistoricalView" class="button">View Historical Projects</a>
+                    <a href="~/AdminManagement/Management" class="button">Back</a>
+                </div>
+            </div>
+
+            <!-- Body -->
+            <div class="project-body">
+                <!-- Titles -->
+                <div class="topic-heading">
+                    <h3 class="proj-title">Project</h3>
+                    <h3 class="proj-title">Team</h3>
+                    <h3 class="proj-title">Deadline</h3>
+                    <h3 class="proj-title">Status</h3>
+                </div>
+
+                <div class="items">
+                    @foreach (var project in Model.ProjectList)
+                    {
+                        <div class="item1">
+                            <h3 class="proj-item">@project.ProjectName</h3>
+                            <h3 class="proj-item">@project.TeamName</h3>
+                            <h3 class="proj-item">@project.Deadline.ToString("yyyy/MM/dd")</h3>
+                            <h3 class="proj-item">@project.Status</h3>
+                        </div>
+                    }
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+
+</html>

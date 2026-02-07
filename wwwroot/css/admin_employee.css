@@ -1,0 +1,154 @@
+﻿/* Responsive Design */
+@media (max-width: 768px) {
+    .nav ul {
+        flex-direction: column; /* Stack navigation items vertically on small screens */
+        text-align: center;
+    }
+
+    .main-container {
+        margin: 10px;
+    }
+}
+
+/* General body styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9; /* Light gray background for the page */
+    margin: 0;
+    padding: 0;
+    color: #333; /* Neutral text color */
+}
+
+/* Header styling */
+header {
+    background-color: #0056b3; /* Blue background */
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between; /* Align the header elements */
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+    header .title h3 {
+        margin: 0;
+        font-size: 24px;
+    }
+
+/* Horizontal Navigation Styling */
+.navcontainer {
+    width: 100%;
+    background-color: #0056b3; /* Same blue as header */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+nav ul {
+    display: flex; /* Arrange navigation items horizontally */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    justify-content: center; /* Center navigation items */
+}
+
+    nav ul li {
+        padding: 15px 20px; /* Add space between items */
+        cursor: pointer;
+    }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        nav ul li:hover {
+            background-color: #003d80; /* Darker blue background on hover */
+        }
+
+/* Main container styling */
+.main-container {
+    display: flex;
+    flex-direction: column; /* Stack the main content */
+    margin: 20px;
+    gap: 20px;
+}
+
+/* Employee container styling */
+.employee-container {
+    margin-top: 30px;
+}
+
+/* Header */
+.employee-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+    .employee-header h1 {
+        font-size: 24px;
+        margin: 0;
+        color: #0056b3;
+    }
+
+    .employee-header .button-group {
+        display: flex;
+        gap: 10px; /* Space between buttons */
+    }
+
+    /* Buttons */
+    .employee-header .button {
+        background-color: #0056b3; /* Match the header/nav color */
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.3s ease;
+        text-decoration: none;
+    }
+
+    .employee-header button:hover {
+        background-color: #003d80; /* Darker blue on hover */
+    }
+
+/* Department Body */
+.employee-body {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.topic-heading {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Adjust columns for ID and Name */
+    text-align: left;
+    font-weight: bold;
+    border-bottom: 2px solid #0056b3;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.items {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.item1 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Match column proportions to the header */
+    background-color: white;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.employee-item {
+    font-size: 14px;
+    color: #333;
+}

@@ -1,0 +1,110 @@
+﻿@model EmployeeManagementSystem.Models.Department
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <title>Add Department</title>
+    <link rel="stylesheet" href="~/css/add_department.css" />
+    <style>
+        .sperror {
+            color: red;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        a {
+            display: inline-block; /* Makes the link behave like a button */
+            background-color: #e7e7e7; /* Light gray background */
+            color: #333; /* Neutral text color */
+            text-decoration: none; /* Remove underline */
+            padding: 10px 20px; /* Spacing inside the link */
+            margin-top: 10px; /* Space above the link */
+            border-radius: 4px; /* Rounded corners */
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+            text-align: center;
+            width: auto;
+        }
+
+        a:hover {
+            background-color: #d6d6d6; /* Darker gray on hover */
+        }
+
+        button, a {
+            display: inline-block; /* Place buttons and links on the same line */
+            margin-right: 10px; /* Add spacing between buttons and links */
+        }
+    </style>
+</head>
+
+<body>
+    <form asp-controller="Admin" asp-action="AddDepartment" method="post" class="card">
+        <label>Department Name</label>
+
+        <!-- Null Error Message -->
+        @if (ViewBag.NullError)
+        {
+            <div class="error">
+                <p style="color:red">Could not add, you should enter something.</p>
+            </div>
+        }
+        @if (ViewBag.SpecialCharError == true)
+        {
+            <div class="charerror">
+                <p style="color: red;">Special characters are not allowed in the department name.</p>
+            </div>
+        }
+        <!-- Add Failed Message -->
+        @if (ViewBag.Error)
+        {
+            <div class="error">
+                <p style="color:red">@Model.DepartmentName could not be added.</p>
+            </div>
+        }
+
+        <!-- Duplicate Error -->
+        @if (ViewBag.DuplicateError)
+        {
+            <div class="duperror">
+                <p style="color:red">The department name already exists. Please enter a unique name.</p>
+            </div>
+        }
+        <!-- Success Message -->
+        @if (ViewBag.Success)
+        {
+            <div class="success">
+                    <p style="color:green">@Model.DepartmentName added successfully!</p>
+            </div>
+        }
+
+        <div id="specialCharError" class="sperror" style="display: none;">
+            Special characters are not allowed.
+        </div>
+
+        <input asp-for="@Model.DepartmentName" type="text" name="departmentname"
+                        id="departmentname" oninput="checkSpecialCharacters()"/>
+
+        <button type="submit">Add</button>
+        <a href="Department">Back</a>
+    </form>
+
+    <script>
+        // Function to check for special characters in the input
+        function checkSpecialCharacters() {
+            const inputField = document.getElementById("departmentname");
+            const errorMessage = document.getElementById("specialCharError");
+
+            // Regular expression to detect special characters
+            const specialCharRegex = /[^a-zA-Z0-9\s]/;
+
+            if (specialCharRegex.test(inputField.value)) {
+                errorMessage.style.display = "block"; // Show error message
+            } else {
+                errorMessage.style.display = "none"; // Hide error message
+            }
+        }
+    </script>
+</body>
+</html>

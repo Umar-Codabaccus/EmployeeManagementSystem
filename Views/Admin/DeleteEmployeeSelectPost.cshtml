@@ -1,0 +1,92 @@
+﻿@model EmployeeManagementSystem.ViewModels.DeleteEmployeeViewModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <title>Delete Employee</title>
+
+    <link rel="stylesheet" href="~/css/delete_employee.css" />
+    <style>
+        .search {
+            background-color: #0056b3; /* Blue background */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+            width: 100%; /* Full width button */
+        }
+
+        .search:hover {
+            background-color: #003d80; /* Darker blue on hover */
+        }
+        /* Select dropdown styling */
+        select {
+            width: 100%; /* Full width dropdown */
+            padding: 10px;
+            margin: 10px 0 20px 0; /* Add spacing between elements */
+            border: 1px solid #ccc; /* Light border */
+            border-radius: 4px;
+            font-size: 14px;
+            box-sizing: border-box; /* Include padding in width calculation */
+            background-color: #fff; /* White background */
+            color: #333; /* Neutral text */
+        }
+        a {
+            display: inline-block; /* Makes the link behave like a button */
+            background-color: #e7e7e7; /* Light gray background */
+            color: #333; /* Neutral text color */
+            text-decoration: none; /* Remove underline */
+            padding: 10px 20px; /* Spacing inside the link */
+            margin-top: 10px; /* Space above the link */
+            border-radius: 4px; /* Rounded corners */
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+            text-align: center;
+            width: auto;
+        }
+
+        a:hover {
+            background-color: #d6d6d6; /* Darker gray on hover */
+        }
+
+        button, a {
+            display: inline-block; /* Place buttons and links on the same line */
+            margin-right: 10px; /* Add spacing between buttons and links */
+        }
+    </style>
+</head>
+<body>
+    <form asp-controller="Admin" asp-action="DeleteEmployeeSelectPost" method="post" class="card">
+        <!-- Search Section -->
+        <label for="keyword">Search Employee:</label>
+
+        @if (ViewBag.ErrorMessage)
+        {
+            <p style="color: red;">Please select an employee to delete</p>
+        }
+        <select asp-for="EmployeeID" name="EmployeeID">
+            <option>Please select one</option>
+
+            @foreach (var items in Model.EmployeeNames)
+            {
+                <option value="@items.EmployeeID">@items.FullName</option>
+            }
+        </select>
+
+        @if (ViewBag.SuccessMessage)
+        {
+            <p style="color: green;">Employee was successfully deleted</p>
+        }
+
+        <input asp-for="@Model.Keyword" type="text" id="keyword" name="keyword" placeholder="Search Employee...">
+        <button type="submit" class="search">Search</button>
+        <a href="Employee">Back</a>
+    </form>
+</body>
+</html>
